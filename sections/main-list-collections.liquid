@@ -1,0 +1,17 @@
+<div class="wrap" style="padding-top: 48px; padding-bottom: 80px;">
+  <h1>Collections</h1>
+  <div class="grid-products">
+    {%- for collection in collections -%}
+      <a class="p-card" href="{{ collection.url }}">
+        {%- if collection.featured_image -%}
+          <img class="p-card-img" src="{{ collection.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" loading="lazy" width="600" height="840">
+        {%- endif -%}
+        <div class="p-meta"><div class="p-name">{{ collection.title }}</div></div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

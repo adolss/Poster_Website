@@ -1,0 +1,92 @@
+<div class="product-main">
+  <a class="back-link" href="{{ routes.all_products_collection_url }}">← All posters</a>
+
+  <div class="product-layout">
+    <div class="product-media">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 900 }}"
+          srcset="{{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 900 }} 900w, {{ product.featured_image | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 760px) 90vw, 500px"
+          alt="{{ product.featured_image.alt | default: product.title | escape }}"
+          width="900" height="1260"
+        >
+      {%- else -%}
+        <div class="p-card-placeholder"><span>poster art coming soon</span></div>
+      {%- endif -%}
+    </div>
+
+    <div>
+      {%- assign chip = '' -%}
+      {%- for t in product.tags -%}
+        {%- if t != 'coming-soon' and chip == '' -%}{%- assign chip = t -%}{%- endif -%}
+      {%- endfor -%}
+      {%- if chip != '' -%}
+        <span class="tag tag-accent-2">{{ chip | capitalize }}</span>
+      {%- endif -%}
+
+      <h1 class="product-title">{{ product.title }}</h1>
+      {%- if product.metafields.custom.subtitle != blank -%}
+        <p class="product-sub text-muted">{{ product.metafields.custom.subtitle }}</p>
+      {%- endif -%}
+      <div class="product-desc">{{ product.description }}</div>
+
+      <div class="price-box">
+        <div>
+          <div class="size">{{ section.settings.size_label }}</div>
+          <div class="size-note">{{ section.settings.size_note }}</div>
+        </div>
+        <div class="amount">{{ product.price | money }}</div>
+      </div>
+
+      {%- form 'product', product, data-product-form: '' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <div class="buy-row">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-add-btn
+            {% unless product.available %}disabled{% endunless %}
+          >
+            {%- if product.available -%}Add to cart{%- else -%}Coming soon{%- endif -%}
+          </button>
+          <a class="btn btn-secondary" href="{{ routes.cart_url }}">Go to cart</a>
+        </div>
+      {%- endform -%}
+
+      <ul class="spec-list">
+        <li>· 200 gsm matte paper, softly textured</li>
+        <li>· Giclée print, fade-resistant inks</li>
+        <li>· Ships rolled in a tube, free EU shipping</li>
+        <li>· Frame not included (any standard 50 × 70 frame fits)</li>
+      </ul>
+    </div>
+  </div>
+
+  {%- assign related_count = 0 -%}
+  {%- capture related_cards -%}
+    {%- for rel in collections.all.products limit: 12 -%}
+      {%- if related_count >= 4 -%}{%- break -%}{%- endif -%}
+      {%- unless rel.id == product.id or rel.featured_image == blank -%}
+        {% render 'product-card', card_product: rel %}
+        {%- assign related_count = related_count | plus: 1 -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if related_count > 0 -%}
+    <div class="related">
+      <h3>You might also like</h3>
+      <div class="related-grid">{{ related_cards }}</div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    { "type": "text", "id": "size_label", "label": "Size label", "default": "50 × 70 cm" },
+    { "type": "text", "id": "size_note", "label": "Size note", "default": "The one and only size. It's a good one." }
+  ]
+}
+{% endschema %}

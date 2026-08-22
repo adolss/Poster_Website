@@ -1,0 +1,55 @@
+<section class="value-props">
+  <div class="value-props-grid">
+    {%- for block in section.blocks -%}
+      <div {{ block.shopify_attributes }}>
+        <h3>{{ block.settings.heading }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Value props",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "prop",
+      "name": "Value prop",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "One size, on purpose" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Every Norrvyn print is 50 × 70 cm — big enough to set a room's mood, standard enough that frames are everywhere." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Value props",
+      "blocks": [
+        {
+          "type": "prop",
+          "settings": {
+            "heading": "One size, on purpose",
+            "text": "Every Norrvyn print is 50 × 70 cm — big enough to set a room's mood, standard enough that frames are everywhere."
+          }
+        },
+        {
+          "type": "prop",
+          "settings": {
+            "heading": "Paper you can pet",
+            "text": "200 gsm matte, uncoated and softly textured. Colors stay pastel and calm, never glossy or shouty."
+          }
+        },
+        {
+          "type": "prop",
+          "settings": {
+            "heading": "Rolled, never folded",
+            "text": "Shipped in a sturdy tube within 3–5 days, free everywhere in the EU. Creases are not part of the aesthetic."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

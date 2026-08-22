@@ -1,0 +1,40 @@
+{%- comment -%}
+  Renders one poster card. Accepts: card_product (product object).
+  Products tagged "coming-soon" (or without an image) get the striped
+  placeholder tile from the original design.
+{%- endcomment -%}
+<a class="p-card" href="{{ card_product.url }}">
+  {%- if card_product.featured_image == blank -%}
+    <div class="p-card-placeholder"><span>poster art coming soon</span></div>
+  {%- else -%}
+    <img
+      class="p-card-img"
+      src="{{ card_product.featured_image | image_url: width: 600 }}"
+      srcset="{{ card_product.featured_image | image_url: width: 400 }} 400w, {{ card_product.featured_image | image_url: width: 600 }} 600w, {{ card_product.featured_image | image_url: width: 900 }} 900w"
+      sizes="(max-width: 760px) 90vw, 300px"
+      alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
+      loading="lazy"
+      width="600" height="840"
+    >
+  {%- endif -%}
+
+  <div class="p-meta">
+    <div>
+      <div class="p-name">{{ card_product.title }}</div>
+      {%- if card_product.metafields.custom.subtitle != blank -%}
+        <div class="p-sub text-muted">{{ card_product.metafields.custom.subtitle }}</div>
+      {%- endif -%}
+    </div>
+    {%- assign chip = '' -%}
+    {%- for t in card_product.tags -%}
+      {%- if t != 'coming-soon' and chip == '' -%}{%- assign chip = t -%}{%- endif -%}
+    {%- endfor -%}
+    {%- if chip != '' -%}
+      <span class="tag tag-accent-2">{{ chip | capitalize }}</span>
+    {%- endif -%}
+  </div>
+  <div class="p-row2">
+    <span class="p-price">{{ card_product.price | money }}</span>
+    <span class="p-view">View poster →</span>
+  </div>
+</a>

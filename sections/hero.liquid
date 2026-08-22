@@ -1,0 +1,50 @@
+{%- liquid
+  assign coll = section.settings.collection
+  assign cta_url = routes.all_products_collection_url
+  if coll != blank
+    assign cta_url = coll.url
+  endif
+-%}
+<section class="hero">
+  <div>
+    <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="hero-sub">{{ section.settings.text }}</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="{{ cta_url }}">{{ section.settings.button_label }}</a>
+      <span class="hero-note">{{ section.settings.note }}</span>
+    </div>
+  </div>
+  <div class="hero-collage" aria-hidden="true">
+    {%- assign shown = 0 -%}
+    {%- if coll != blank -%}
+      {%- for product in coll.products limit: 6 -%}
+        {%- if shown >= 3 -%}{%- break -%}{%- endif -%}
+        {%- if product.featured_image -%}
+          <img src="{{ product.featured_image | image_url: width: 500 }}" alt="" loading="eager" width="500" height="700">
+          {%- assign shown = shown | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Retro prints · pastel moods" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Big, calm color for your walls." },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Norrvyn makes retro-style posters of the places that make you exhale — lakes, peaks, quiet quays. One generous size, ten little worlds."
+    },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Browse the posters" },
+    { "type": "text", "id": "note", "label": "Note beside button", "default": "50 × 70 cm · €70" },
+    { "type": "collection", "id": "collection", "label": "Collage images from collection" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

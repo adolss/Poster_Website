@@ -1,0 +1,18 @@
+<footer class="site-footer">
+  <span class="footer-brand">{{ shop.name }}</span>
+  <span class="text-muted">{{ section.settings.tagline }}</span>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "50 × 70 cm posters · Free EU shipping · hello@norrvyn.com"
+    }
+  ]
+}
+{% endschema %}

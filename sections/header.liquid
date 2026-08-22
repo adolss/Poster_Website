@@ -1,0 +1,26 @@
+<nav class="site-nav">
+  <a href="{{ routes.root_url }}" class="nav-brand">{{ shop.name }}</a>
+  <div class="nav-links">
+    {%- assign posters_url = routes.all_products_collection_url -%}
+    {%- if section.settings.posters_collection != blank -%}
+      {%- assign posters_url = section.settings.posters_collection.url -%}
+    {%- endif -%}
+    <a href="{{ posters_url }}">Posters</a>
+    {%- if section.settings.story_page != blank -%}
+      <a href="{{ section.settings.story_page.url }}">Our story</a>
+    {%- endif -%}
+    <a href="{{ routes.cart_url }}" class="btn btn-primary cart-pill">
+      Cart · <span data-cart-count>{{ cart.item_count }}</span>
+    </a>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "collection", "id": "posters_collection", "label": "Posters link goes to" },
+    { "type": "page", "id": "story_page", "label": "Our story page" }
+  ]
+}
+{% endschema %}
