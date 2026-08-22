@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "collection": {
+      "type": "featured-collection"
+    },
+    "values": {
+      "type": "value-props",
+      "blocks": {
+        "b1": {
+          "type": "prop",
+          "settings": {
+            "heading": "One size, on purpose",
+            "text": "Every Norrvyn print is 50 × 70 cm — big enough to set a room's mood, standard enough that frames are everywhere."
+          }
+        },
+        "b2": {
+          "type": "prop",
+          "settings": {
+            "heading": "Paper you can pet",
+            "text": "200 gsm matte, uncoated and softly textured. Colors stay pastel and calm, never glossy or shouty."
+          }
+        },
+        "b3": {
+          "type": "prop",
+          "settings": {
+            "heading": "Rolled, never folded",
+            "text": "Shipped in a sturdy tube within 3–5 days, free everywhere in the EU. Creases are not part of the aesthetic."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "collection",
+    "values"
+  ]
+}

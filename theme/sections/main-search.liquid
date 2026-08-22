@@ -1,0 +1,24 @@
+<div class="wrap" style="padding-top: 48px; padding-bottom: 80px;">
+  <h1>Search</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" style="max-width: 420px; margin-bottom: 32px;">
+    <input class="input" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search posters">
+  </form>
+
+  {%- if search.performed -%}
+    {%- if search.results_count == 0 -%}
+      <p class="text-muted">No results for “{{ search.terms | escape }}”.</p>
+    {%- else -%}
+      <div class="grid-products">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', card_product: item %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Search", "settings": [] }
+{% endschema %}

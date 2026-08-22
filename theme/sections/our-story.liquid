@@ -1,0 +1,34 @@
+<div class="page-main">
+  <h1>{{ section.settings.heading }}</h1>
+  <div class="rte">
+    {%- if page.content != blank -%}
+      {{ page.content }}
+    {%- else -%}
+      <p>{{ section.settings.para_1 }}</p>
+      <p>{{ section.settings.para_2 }}</p>
+      <p>{{ section.settings.para_3 }}</p>
+    {%- endif -%}
+  </div>
+  <a class="btn btn-primary" style="margin-top: 20px;" href="{{ routes.all_products_collection_url }}">See the collection</a>
+</div>
+
+{% schema %}
+{
+  "name": "Our story",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our story" },
+    {
+      "type": "textarea", "id": "para_1", "label": "Paragraph 1",
+      "default": "Norrvyn started with one wall and one problem: everything for sale was either loud, glossy, or beige. So we began making the posters we wanted to live with — retro in spirit, pastel in palette, simple by conviction."
+    },
+    {
+      "type": "textarea", "id": "para_2", "label": "Paragraph 2",
+      "default": "Each print starts as a real place we love. We strip it down to a few flat shapes and a soft light, print it big on matte paper, and send it rolling."
+    },
+    {
+      "type": "textarea", "id": "para_3", "label": "Paragraph 3",
+      "default": "One size. Ten posters. That's the whole shop — and we like it that way."
+    }
+  ]
+}
+{% endschema %}

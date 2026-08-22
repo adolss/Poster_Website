@@ -1,0 +1,21 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you were looking for has rolled away."
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search posters",
+      "no_results": "No results for that search."
+    },
+    "cart": {
+      "title": "Your cart",
+      "empty": "Nothing in here yet — your walls are still waiting.",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total",
+      "checkout": "Checkout"
+    }
+  }
+}

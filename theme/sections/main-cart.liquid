@@ -1,0 +1,54 @@
+<div class="cart-main">
+  <h1>Your cart</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <p class="text-muted" style="margin: 12px 0 24px;">Nothing in here yet — your walls are still waiting.</p>
+    <a class="btn btn-primary" href="{{ routes.all_products_collection_url }}">Browse the posters</a>
+  {%- else -%}
+    <p class="text-muted" style="margin: 0 0 28px;">Good taste confirmed.</p>
+
+    <form action="{{ routes.cart_url }}" method="post">
+      <div class="cart-lines">
+        {%- for item in cart.items -%}
+          <div class="cart-line">
+            {%- if item.image -%}
+              <img class="cart-line-img" src="{{ item.image | image_url: width: 168 }}" alt="{{ item.title | escape }}" width="84" height="118">
+            {%- else -%}
+              <div class="p-card-placeholder" style="width: 84px;"></div>
+            {%- endif -%}
+            <div>
+              <div class="cart-line-name">{{ item.product.title }}</div>
+              <div class="cart-line-sub text-muted">{{ section.settings.line_note }} · {{ item.price | money }}</div>
+              <a class="cart-line-remove" href="{{ item.url_to_remove }}">Remove</a>
+            </div>
+            <div class="qty-ctrl">
+              {%- assign qty_minus = item.quantity | minus: 1 -%}
+              {%- assign qty_plus = item.quantity | plus: 1 -%}
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ qty_minus }}" aria-label="Decrease quantity">−</a>
+              <span>{{ item.quantity }}</span>
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ qty_plus }}" aria-label="Increase quantity">+</a>
+            </div>
+            <div class="cart-line-total">{{ item.final_line_price | money }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="cart-summary">
+        <div class="cart-summary-row"><span>Subtotal</span><span style="font-weight: 700;">{{ cart.total_price | money }}</span></div>
+        <div class="cart-summary-row"><span>Shipping</span><span style="font-weight: 700; color: var(--color-accent-2-800);">{{ section.settings.shipping_note }}</span></div>
+        <div class="cart-summary-total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+        <button type="submit" name="checkout" class="btn btn-primary btn-block">Checkout</button>
+      </div>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": [
+    { "type": "text", "id": "line_note", "label": "Line item note", "default": "50 × 70 cm" },
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free — calculated at checkout" }
+  ]
+}
+{% endschema %}
