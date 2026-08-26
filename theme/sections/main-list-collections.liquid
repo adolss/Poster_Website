@@ -4,7 +4,7 @@
     {%- for collection in collections -%}
       <a class="p-card" href="{{ collection.url }}">
         {%- if collection.featured_image -%}
-          <img class="p-card-img" src="{{ collection.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" loading="lazy" width="600" height="840">
+          <img class="p-card-img" src="{{ collection.featured_image | image_url: width: 600 }}" alt="{{ collection.title | escape }}" loading="lazy" width="600" height="840" style="aspect-ratio: {{ collection.featured_image.aspect_ratio }};">
         {%- endif -%}
         <div class="p-meta"><div class="p-name">{{ collection.title }}</div></div>
       </a>

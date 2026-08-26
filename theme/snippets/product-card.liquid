@@ -15,6 +15,7 @@
       alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
       loading="lazy"
       width="600" height="840"
+      style="aspect-ratio: {{ card_product.featured_image.aspect_ratio }};"
     >
   {%- endif -%}
 

@@ -63,7 +63,7 @@ h3 { font-size: 25px; }
 h4 { font-size: 20px; }
 p { margin: 0 0 13px; }
 a { color: var(--color-accent); text-underline-offset: 3px; }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; height: auto; }
 .text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
 :focus { outline: none; }
 :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }

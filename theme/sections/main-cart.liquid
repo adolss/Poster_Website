@@ -12,7 +12,7 @@
         {%- for item in cart.items -%}
           <div class="cart-line">
             {%- if item.image -%}
-              <img class="cart-line-img" src="{{ item.image | image_url: width: 168 }}" alt="{{ item.title | escape }}" width="84" height="118">
+              <img class="cart-line-img" src="{{ item.image | image_url: width: 168 }}" alt="{{ item.title | escape }}" width="84" height="118" style="aspect-ratio: {{ item.image.aspect_ratio }};">
             {%- else -%}
               <div class="p-card-placeholder" style="width: 84px;"></div>
             {%- endif -%}
