@@ -10,6 +10,7 @@
           sizes="(max-width: 760px) 90vw, 500px"
           alt="{{ product.featured_image.alt | default: product.title | escape }}"
           width="900" height="1260"
+          style="aspect-ratio: {{ product.featured_image.aspect_ratio }};"
         >
       {%- else -%}
         <div class="p-card-placeholder"><span>poster art coming soon</span></div>
