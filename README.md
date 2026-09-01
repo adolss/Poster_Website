@@ -4,13 +4,41 @@ Custom Online Store 2.0 theme for norrvyn.ch, ported from the original
 Norrvyn design (same palette, Caprasimo/Figtree type, poster cards,
 responsive layout). Cart and checkout are native Shopify.
 
-## Connect via GitHub
+## Live and dev themes
 
-In Shopify admin: **Online Store → Themes → Add theme → Connect from GitHub**
-→ repository `adolss/Poster_Website` → branch **`shopify`** (theme files are
-at the root of that branch). Then **Publish** it (or preview first with
-Customize). Edits made in Shopify's theme editor are committed back to the
-branch automatically.
+Two themes, two branches — so work in progress never lands on the live shop.
+
+| Theme in Shopify | Branch | State |
+| --- | --- | --- |
+| **Norrvyn (live)** | `shopify` | Published — serves norrvyn.ch |
+| **Norrvyn (dev)** | `shopify-dev` | Unpublished — preview link only |
+
+Connect each one in **Online Store → Themes → Add theme → Connect from
+GitHub** → repo `adolss/Poster_Website` → pick the branch (theme files are at
+the branch root). Publish only the live one; leave the dev theme unpublished
+and open it with **Preview**.
+
+### Day-to-day workflow
+
+1. All changes — code or theme-editor tweaks — go to the **dev** theme.
+   Shopify commits editor changes back to `shopify-dev` automatically.
+2. Check the dev theme's preview link.
+3. When it looks right, promote to live by merging the branch:
+   `git push origin origin/shopify-dev:shopify` (fast-forward), or open a PR
+   `shopify-dev` → `shopify` on GitHub if you want the diff in front of you.
+   Shopify syncs the live theme within a minute.
+
+### Two things to know
+
+- **Same store data.** An unpublished theme previews the *live* products,
+  prices and orders — it is a safe sandbox for design and code, not for
+  product data. For a fully separate playground (own products, test orders),
+  create a free **development store** in Shopify Partners and connect the
+  `shopify-dev` branch there instead.
+- **`config/settings_data.json` is written by the theme editor** on both
+  themes, so it is the one file that can conflict when merging. If git flags
+  it, keep the version from whichever theme you last styled deliberately
+  (usually dev) rather than hand-merging it.
 
 ## Store setup checklist
 
