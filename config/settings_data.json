@@ -1,9 +1,41 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_bg": "#f5ead8",
     "color_surface": "#ebddc5",
     "color_text": "#201e1d",
     "color_accent": "#c67139",
-    "color_accent_2": "#7a8a5e"
+    "color_accent_2": "#7a8a5e",
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show": true,
+          "text": "Swiss places, softly illustrated · 50 × 70 cm posters"
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "posters_collection": "",
+          "story_page": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "tagline": "Swiss travel posters · 50 × 70 cm · Frames not included"
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
