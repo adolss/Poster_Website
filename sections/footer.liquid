@@ -1,6 +1,9 @@
 <footer class="site-footer">
   <span class="footer-brand">{{ shop.name }}</span>
   <span class="text-muted">{{ section.settings.tagline }}</span>
+  {%- if pages['shipping-faq'] != blank -%}
+    <a href="{{ pages['shipping-faq'].url }}">Shipping &amp; FAQ</a>
+  {%- endif -%}
 </footer>
 
 {% schema %}
@@ -11,7 +14,7 @@
       "type": "text",
       "id": "tagline",
       "label": "Tagline",
-      "default": "50 × 70 cm posters · Free EU shipping · hello@norrvyn.com"
+      "default": "Swiss travel posters · 50 × 70 cm · Frames not included"
     }
   ]
 }
