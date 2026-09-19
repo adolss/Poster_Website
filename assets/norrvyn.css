@@ -336,3 +336,13 @@ img { display: block; max-width: 100%; height: auto; }
   .nav-links { gap: 10px; }
   .nav-brand { font-size: 22px; }
 }
+
+/* Product gallery: preserve poster and room-image proportions. */
+.product-gallery-item { margin: 0; }
+.product-gallery-item + .product-gallery-item { margin-top: 24px; }
+.product-gallery-item a { display: block; }
+.product-gallery-item figcaption { margin-top: 10px; font-size: 12px; color: var(--color-neutral-700); }
+@media (max-width: 760px) {
+  .hero-cta { flex-wrap: wrap; }
+  .product-media { padding: 16px; }
+}
