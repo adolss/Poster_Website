@@ -36,7 +36,7 @@
       <div class="cart-summary">
         <div class="cart-summary-row"><span>Subtotal</span><span style="font-weight: 700;">{{ cart.total_price | money }}</span></div>
         <div class="cart-summary-row"><span>Shipping</span><span style="font-weight: 700; color: var(--color-accent-2-800);">{{ section.settings.shipping_note }}</span></div>
-        <div class="cart-summary-total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+        <div class="cart-summary-total"><span>Subtotal before shipping</span><span>{{ cart.total_price | money }}</span></div>
         <button type="submit" name="checkout" class="btn btn-primary btn-block">Checkout</button>
       </div>
     </form>
@@ -48,7 +48,7 @@
   "name": "Cart page",
   "settings": [
     { "type": "text", "id": "line_note", "label": "Line item note", "default": "50 × 70 cm" },
-    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free — calculated at checkout" }
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Calculated at checkout" }
   ]
 }
 {% endschema %}
