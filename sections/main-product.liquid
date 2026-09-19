@@ -3,18 +3,26 @@
 
   <div class="product-layout">
     <div class="product-media">
-      {%- if product.featured_image -%}
-        <img
-          src="{{ product.featured_image | image_url: width: 900 }}"
-          srcset="{{ product.featured_image | image_url: width: 600 }} 600w, {{ product.featured_image | image_url: width: 900 }} 900w, {{ product.featured_image | image_url: width: 1200 }} 1200w"
-          sizes="(max-width: 760px) 90vw, 500px"
-          alt="{{ product.featured_image.alt | default: product.title | escape }}"
-          width="900" height="1260"
-          style="aspect-ratio: {{ product.featured_image.aspect_ratio }};"
-        >
+      {%- for image in product.images -%}
+        <figure class="product-gallery-item">
+          <a href="{{ image | image_url: width: 2000 }}" target="_blank" rel="noopener" aria-label="View {{ product.title | escape }} image {{ forloop.index }} full size">
+            <img
+              src="{{ image | image_url: width: 900 }}"
+              srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1200 }} 1200w"
+              sizes="(max-width: 760px) 90vw, 500px"
+              alt="{{ image.alt | default: product.title | escape }}"
+              width="{{ image.width }}" height="{{ image.height }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              style="aspect-ratio: {{ image.aspect_ratio }}; object-fit: contain;"
+            >
+          </a>
+          {%- unless forloop.first -%}
+            <figcaption>Room styling inspiration. Frame not included.</figcaption>
+          {%- endunless -%}
+        </figure>
       {%- else -%}
         <div class="p-card-placeholder"><span>poster art coming soon</span></div>
-      {%- endif -%}
+      {%- endfor -%}
     </div>
 
     <div>
@@ -30,7 +38,13 @@
       {%- if product.metafields.custom.subtitle != blank -%}
         <p class="product-sub text-muted">{{ product.metafields.custom.subtitle }}</p>
       {%- endif -%}
-      <div class="product-desc">{{ product.description }}</div>
+      <div class="product-desc">
+        {%- if product.description != blank -%}
+          {{ product.description }}
+        {%- else -%}
+          <p>A vintage-inspired view of {{ product.title | escape }}, Switzerland, in soft colours. A little reminder of a favourite place, ready for your wall.</p>
+        {%- endif -%}
+      </div>
 
       <div class="price-box">
         <div>
@@ -56,10 +70,10 @@
       {%- endform -%}
 
       <ul class="spec-list">
-        <li>· 200 gsm matte paper, softly textured</li>
-        <li>· Giclée print, fade-resistant inks</li>
-        <li>· Ships rolled in a tube, free EU shipping</li>
-        <li>· Frame not included (any standard 50 × 70 frame fits)</li>
+        <li>· 50 × 70 cm portrait poster</li>
+        <li>· Vintage-inspired Swiss travel artwork</li>
+        <li>· Frame not included</li>
+        <li>· Room images are illustrative styling examples</li>
       </ul>
     </div>
   </div>
