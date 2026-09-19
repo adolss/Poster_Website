@@ -17,7 +17,7 @@
         "text": "Nordlys brings Swiss lakes, peaks and city streets to your walls. Six travel posters in soft colours, inspired by the places you love.",
         "button_label": "Browse the posters",
         "note": "50 × 70 cm · CHF 60 · Unframed",
-        "collection": ""
+        "collection": "posters"
       }
     },
     "collection": {
@@ -25,7 +25,7 @@
       "settings": {
         "heading": "The collection",
         "subheading": "Six posters. One size. Zero wrong picks.",
-        "collection": "",
+        "collection": "posters",
         "limit": 12
       }
     },
