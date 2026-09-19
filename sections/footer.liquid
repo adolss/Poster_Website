@@ -7,6 +7,14 @@
   {%- if pages['contact'] != blank -%}
     <a href="{{ pages['contact'].url }}">Contact</a>
   {%- endif -%}
+  {%- if pages['about-nordlys'] != blank -%}
+    <a href="{{ pages['about-nordlys'].url }}">About Nordlys</a>
+  {%- endif -%}
+  {%- for policy in shop.policies -%}
+    {%- if policy.body != blank -%}
+      <a href="{{ policy.url }}">{{ policy.title | escape }}</a>
+    {%- endif -%}
+  {%- endfor -%}
 </footer>
 
 {% schema %}
