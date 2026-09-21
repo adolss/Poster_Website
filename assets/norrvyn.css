@@ -346,3 +346,9 @@ img { display: block; max-width: 100%; height: auto; }
   .hero-cta { flex-wrap: wrap; }
   .product-media { padding: 16px; }
 }
+
+/* Keep the expanded footer readable on intermediate screen widths. */
+.site-footer { flex-wrap: wrap; }
+.site-footer > a { font-size: 14px; }
+.cart-summary-row, .cart-summary-total { gap: 16px; }
+.cart-summary-row > :last-child, .cart-summary-total > :last-child { text-align: right; }
