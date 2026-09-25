@@ -15,3 +15,4 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 /* Keep the whole framed poster visible in the temporary square room photos. */
 .hero-scene>img,.room-story>img{object-position:center top}
+@media(min-width:761px) and (max-width:1100px){.purchase-button{font-size:16px;gap:12px;padding:16px}.purchase-button [data-add-label]{white-space:nowrap}}
