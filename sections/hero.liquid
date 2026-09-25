@@ -3,9 +3,17 @@
   assign cta_url = coll.url | default: routes.all_products_collection_url
   assign featured = section.settings.featured_product
   if featured == blank
-    assign featured = all_products['caumasee']
+    assign featured = all_products['engadin']
   endif
-  assign room = section.settings.room_image | default: featured.images[1]
+  assign room = featured.images[1]
+  for scene in featured.images
+    if scene.src contains '-side-view'
+      assign room = scene
+      break
+    endif
+  endfor
+  assign room = section.settings.room_image | default: room
+  assign room_alt = featured.title | append: ' poster above a sideboard. Styling inspiration; frame not included.'
   assign price_products = coll.products | sort: 'price'
   assign lowest = price_products.first
 -%}
@@ -18,7 +26,7 @@
   </div>
   <figure class="hero-scene">
     {% if room %}
-      <img src="{{ room | image_url: width: 1600 }}" srcset="{{ room | image_url: width: 800 }} 800w, {{ room | image_url: width: 1200 }} 1200w, {{ room | image_url: width: 1800 }} 1800w" sizes="(max-width: 760px) 100vw, 68vw" alt="{{ room.alt | default: 'Caumasee poster in a wooden frame in a living room. Styling inspiration; frame not included.' | escape }}" width="{{ room.width }}" height="{{ room.height }}" fetchpriority="high">
+      <img src="{{ room | image_url: width: 1600 }}" srcset="{{ room | image_url: width: 800 }} 800w, {{ room | image_url: width: 1200 }} 1200w, {{ room | image_url: width: 1800 }} 1800w" sizes="(max-width: 760px) 100vw, 68vw" alt="{{ room.alt | default: room_alt | escape }}" width="{{ room.width }}" height="{{ room.height }}" fetchpriority="high">
     {% else %}<div class="scene-placeholder">Room photograph coming soon</div>{% endif %}
     <figcaption>{{ section.settings.image_caption | escape }}</figcaption>
   </figure>
@@ -31,6 +39,6 @@
 {"type":"collection","id":"collection","label":"Collection"},
 {"type":"product","id":"featured_product","label":"Room image from product"},
 {"type":"image_picker","id":"room_image","label":"Custom room scene","info":"Optional. Replace with the sideboard scene using the actual poster."},
-{"type":"text","id":"image_caption","label":"Image caption","default":"Caumasee, at home."}
+{"type":"text","id":"image_caption","label":"Image caption","default":"Engadin, at home."}
 ],"presets":[{"name":"Hero"}]}
 {% endschema %}
