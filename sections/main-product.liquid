@@ -1,110 +1,54 @@
+{%- assign variant = product.selected_or_first_available_variant -%}
 <div class="product-main">
-  <a class="back-link" href="{{ routes.all_products_collection_url }}">← All posters</a>
-
+  <a class="back-link" href="{{ routes.all_products_collection_url }}">← All prints</a>
   <div class="product-layout">
-    <div class="product-media">
-      {%- for image in product.images -%}
-        <figure class="product-gallery-item">
+    <div class="product-gallery" data-gallery>
+      {% for image in product.images %}
+        <figure class="gallery-panel" id="Gallery-{{ section.id }}-{{ forloop.index }}" data-gallery-panel {% unless forloop.first %}hidden{% endunless %}>
           <a href="{{ image | image_url: width: 2000 }}" target="_blank" rel="noopener" aria-label="View {{ product.title | escape }} image {{ forloop.index }} full size">
-            <img
-              src="{{ image | image_url: width: 900 }}"
-              srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1200 }} 1200w"
-              sizes="(max-width: 760px) 90vw, 500px"
-              alt="{{ image.alt | default: product.title | escape }}"
-              width="{{ image.width }}" height="{{ image.height }}"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              style="aspect-ratio: {{ image.aspect_ratio }}; object-fit: contain;"
-            >
+            <img src="{{ image | image_url: width: 1200 }}" alt="{{ image.alt | default: product.title | escape }}" width="{{ image.width }}" height="{{ image.height }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
           </a>
-          {%- unless forloop.first -%}
-            <figcaption>Room styling inspiration. Frame not included.</figcaption>
-          {%- endunless -%}
         </figure>
-      {%- else -%}
-        <div class="p-card-placeholder"><span>poster art coming soon</span></div>
-      {%- endfor -%}
+      {% else %}<div class="p-card-placeholder">Image coming soon</div>{% endfor %}
+      {% if product.images.size > 1 %}
+        <div class="gallery-thumbs" aria-label="Product images">
+          {% for image in product.images %}
+            <button type="button" data-gallery-select="{{ forloop.index0 }}" aria-controls="Gallery-{{ section.id }}-{{ forloop.index }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show {{ product.title | escape }} {% if forloop.first %}artwork{% else %}room view {{ forloop.index }}{% endif %}">
+              <img src="{{ image | image_url: width: 400 }}" alt="" width="{{ image.width }}" height="{{ image.height }}" loading="lazy">
+            </button>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
-
-    <div>
-      {%- assign chip = '' -%}
-      {%- for t in product.tags -%}
-        {%- if t != 'coming-soon' and chip == '' -%}{%- assign chip = t -%}{%- endif -%}
-      {%- endfor -%}
-      {%- if chip != '' -%}
-        <span class="tag tag-accent-2">{{ chip | capitalize }}</span>
-      {%- endif -%}
-
-      <h1 class="product-title">{{ product.title }}</h1>
-      {%- if product.metafields.custom.subtitle != blank -%}
-        <p class="product-sub text-muted">{{ product.metafields.custom.subtitle }}</p>
-      {%- endif -%}
-      <div class="product-desc">
-        {%- if product.description != blank -%}
-          {{ product.description }}
-        {%- else -%}
-          <p>A vintage-inspired view of {{ product.title | escape }}, Switzerland, in soft colours. A little reminder of a favourite place, ready for your wall.</p>
-        {%- endif -%}
+    <div class="product-details">
+      <p class="eyebrow">The Swiss collection</p>
+      <h1 class="product-title">{{ product.title | escape }}</h1>
+      {% if product.metafields.custom.subtitle != blank %}<p class="product-sub">{{ product.metafields.custom.subtitle | escape }}</p>{% endif %}
+      <p class="product-price">{{ variant.price | money_with_currency }}</p>
+      <p class="product-intro">{% case product.handle %}{% when 'caumasee' %}A quiet moment by the lake, in turquoise and pine green.{% when 'bern' %}Summer on the Aare, with the city rising above the water.{% when 'bernina' %}A red train winding through a world of snow and soft blue.{% when 'engadin' %}Golden larches, mountain air and a moment by the lake.{% when 'langstrasse' %}Warm façades and everyday life on a familiar Zürich street.{% when 'stoosbahn' %}A bright red funicular climbing into the Swiss mountain sky.{% else %}A Swiss place worth keeping, illustrated in soft colours.{% endcase %}</p>
+      <dl class="product-specs"><dt>Format</dt><dd>{{ section.settings.size_label | escape }}</dd></dl>
+      <p class="text-muted unframed-note">Unframed. Fits a standard 50 × 70 cm frame.</p>
+      {% form 'product', product, data-product-form: '' %}
+        {% if product.variants.size > 1 %}
+          <label for="Variant-{{ section.id }}">Choose a variant</label>
+          <select class="input" id="Variant-{{ section.id }}" name="id" data-variant-select>
+            {% for v in product.variants %}<option value="{{ v.id }}" data-available="{{ v.available }}" data-price="{{ v.price | money_with_currency | escape }}" {% if v.id == variant.id %}selected{% endif %}>{{ v.title | escape }} — {{ v.price | money_with_currency }}{% unless v.available %} — Sold out{% endunless %}</option>{% endfor %}
+          </select>
+        {% else %}<input type="hidden" name="id" value="{{ variant.id }}">{% endif %}
+        <button type="submit" class="btn btn-primary btn-block purchase-button" data-add-btn {% unless variant.available %}disabled{% endunless %}><span data-add-label>{% if variant.available %}Add to cart — {{ variant.price | money_with_currency }}{% else %}Sold out{% endif %}</span><span aria-hidden="true">→</span></button>
+        <p class="cart-feedback" data-cart-feedback role="status" aria-live="polite"></p>
+      {% endform %}
+      <p class="product-help"><a href="{{ routes.cart_url }}">View cart</a> · <a href="/pages/contact">Ask a question</a></p>
+      <div class="product-accordions">
+        <details><summary>About the print</summary><div class="accordion-content">{{ product.description }}<p>Room images show styling inspiration. Frames are not included.</p></div></details>
+        <details><summary>Delivery &amp; returns</summary><div class="accordion-content"><p>Standard shipping within Switzerland: CHF 6.90 per order. Estimated delivery: 4–7 business days.</p><p>No change-of-mind returns or exchanges. For damaged, defective or incorrect items, please contact us promptly. Your statutory rights remain unaffected.</p><p><a href="/pages/shipping-faq">Shipping &amp; FAQ</a>{% if shop.refund_policy.body != blank %} · <a href="{{ shop.refund_policy.url }}">Returns policy</a>{% endif %}</p></div></details>
+        <details><summary>Framing guide</summary><div class="accordion-content"><p>Choose a frame made for a 50 × 70 cm print. For a mount, choose a larger frame with a 50 × 70 cm opening.</p><p>Keep your print dry and out of direct sunlight. Frame and hanging hardware are not included.</p></div></details>
       </div>
-
-      <div class="price-box">
-        <div>
-          <div class="size">{{ section.settings.size_label }}</div>
-          <div class="size-note">{{ section.settings.size_note }}</div>
-        </div>
-        <div class="amount">{{ product.price | money }}</div>
-      </div>
-
-      {%- form 'product', product, data-product-form: '' -%}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        <div class="buy-row">
-          <button
-            type="submit"
-            class="btn btn-primary"
-            data-add-btn
-            {% unless product.available %}disabled{% endunless %}
-          >
-            {%- if product.available -%}Add to cart{%- else -%}Coming soon{%- endif -%}
-          </button>
-          <a class="btn btn-secondary" href="{{ routes.cart_url }}">Go to cart</a>
-        </div>
-      {%- endform -%}
-
-      <ul class="spec-list">
-        <li>· 50 × 70 cm portrait poster</li>
-        <li>· Vintage-inspired Swiss travel artwork</li>
-        <li>· Frame not included</li>
-        <li>· Standard shipping within Switzerland: CHF 6.90 per order</li>
-        <li>· Estimated delivery: 4–7 business days</li>
-        <li>· Room images are illustrative styling examples</li>
-      </ul>
-      <p style="margin-top: 20px; font-size: 14px;"><a href="/pages/shipping-faq">Shipping &amp; FAQ</a> · <a href="{{ shop.refund_policy.url }}">Returns</a> · <a href="/pages/contact">Ask a question</a></p>
     </div>
   </div>
-
-  {%- assign related_count = 0 -%}
-  {%- capture related_cards -%}
-    {%- for rel in collections.all.products limit: 12 -%}
-      {%- if related_count >= 4 -%}{%- break -%}{%- endif -%}
-      {%- unless rel.id == product.id or rel.featured_image == blank -%}
-        {% render 'product-card', card_product: rel %}
-        {%- assign related_count = related_count | plus: 1 -%}
-      {%- endunless -%}
-    {%- endfor -%}
-  {%- endcapture -%}
-  {%- if related_count > 0 -%}
-    <div class="related">
-      <h3>You might also like</h3>
-      <div class="related-grid">{{ related_cards }}</div>
-    </div>
-  {%- endif -%}
+  {% assign room = product.images[1] %}
+  {% if room %}<section class="room-story"><img src="{{ room | image_url: width: 1600 }}" alt="{{ product.title | escape }} in a room — illustrative styling inspiration" width="{{ room.width }}" height="{{ room.height }}" loading="lazy"><div><h2>A little elsewhere, at home.</h2><p>A feel for {{ product.title | escape }} in your space.</p><p class="text-muted">50 × 70 cm. Styling inspiration; frame not included. Check the dimensions against your own wall.</p></div></section>{% endif %}
 </div>
-
 {% schema %}
-{
-  "name": "Product page",
-  "settings": [
-    { "type": "text", "id": "size_label", "label": "Size label", "default": "50 × 70 cm" },
-    { "type": "text", "id": "size_note", "label": "Size note", "default": "The one and only size. It's a good one." }
-  ]
-}
+{"name":"Product page","settings":[{"type":"text","id":"size_label","label":"Size label","default":"50 × 70 cm"},{"type":"text","id":"size_note","label":"Size note","default":"Unframed"}]}
 {% endschema %}
