@@ -26,7 +26,9 @@
   </div>
   <figure class="hero-scene">
     {% if room %}
+      <a href="{{ featured.url }}" aria-label="View {{ featured.title | escape }} poster" style="display:block;color:inherit">
       <img src="{{ room | image_url: width: 1600 }}" srcset="{{ room | image_url: width: 800 }} 800w, {{ room | image_url: width: 1200 }} 1200w, {{ room | image_url: width: 1800 }} 1800w" sizes="(max-width: 760px) 100vw, 68vw" alt="{{ room.alt | default: room_alt | escape }}" width="{{ room.width }}" height="{{ room.height }}" fetchpriority="high">
+      </a>
     {% else %}<div class="scene-placeholder">Room photograph coming soon</div>{% endif %}
     <figcaption>{{ section.settings.image_caption | escape }}</figcaption>
   </figure>
