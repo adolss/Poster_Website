@@ -1,6 +1,6 @@
 <div class="page-main">
-  <h1>{% if page.handle == "about-nordlys" %}The studio{% else %}{{ page.title }}{% endif %}</h1>
-  <div class="rte">{{ page.content | replace: "Nordlys", "BLICKLI" }}</div>
+  <h1>{{ page.title | escape }}</h1>
+  <div class="rte">{{ page.content }}</div>
   {%- if page.handle == 'contact' -%}
     <p>Questions about a poster or an order? Send us a message below. If you have already ordered, include your order number.</p>
     {%- form 'contact', id: 'BlickliContact', class: 'blickli-contact' -%}
