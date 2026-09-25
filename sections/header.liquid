@@ -6,8 +6,9 @@
       {%- assign posters_url = section.settings.posters_collection.url -%}
     {%- endif -%}
     <a href="{{ posters_url }}">Prints</a>
-    {%- if section.settings.story_page != blank -%}
-      <a href="{{ section.settings.story_page.url }}">The studio</a>
+    {%- assign studio_page = section.settings.story_page | default: pages['the-studio'] -%}
+    {%- if studio_page != blank -%}
+      <a href="{{ studio_page.url }}">The studio</a>
     {%- endif -%}
     <a href="{{ routes.cart_url }}" class="cart-link">
       Cart (<span data-cart-count>{{ cart.item_count }}</span>)
