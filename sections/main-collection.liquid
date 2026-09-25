@@ -1,6 +1,6 @@
 <section class="wrap" style="padding-top: 40px; padding-bottom: 80px;">
   <div class="section-head">
-    <h2>{{ collection.title }}</h2>
+    <h1>{% if collection.handle == "posters" or collection.handle == "all" %}The prints{% else %}{{ collection.title }}{% endif %}</h1>
     {%- if collection.description != blank -%}
       <span class="text-muted">{{ collection.description | strip_html }}</span>
     {%- endif -%}
@@ -22,3 +22,4 @@
 {% schema %}
 { "name": "Collection page", "settings": [] }
 {% endschema %}
+
