@@ -1,20 +1,56 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Norrvyn",
-    "theme_version": "1.0.0",
-    "theme_author": "Norrvyn",
+    "theme_name": "BLICKLI",
+    "theme_version": "2.0.0",
+    "theme_author": "BLICKLI",
     "theme_documentation_url": "https://github.com/adolss/Poster_Website",
     "theme_support_url": "https://github.com/adolss/Poster_Website/issues"
   },
   {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Storefront name",
+        "default": "BLICKLI"
+      }
+    ]
+  },
+  {
     "name": "Colors",
     "settings": [
-      { "type": "color", "id": "color_bg", "label": "Background", "default": "#f5ead8" },
-      { "type": "color", "id": "color_surface", "label": "Surface", "default": "#ebddc5" },
-      { "type": "color", "id": "color_text", "label": "Text", "default": "#201e1d" },
-      { "type": "color", "id": "color_accent", "label": "Accent (terracotta)", "default": "#c67139" },
-      { "type": "color", "id": "color_accent_2", "label": "Accent 2 (sage)", "default": "#7a8a5e" }
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background",
+        "default": "#fdfcf9"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Surface",
+        "default": "#eeece8"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Buttons and links",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_2",
+        "label": "Secondary text",
+        "default": "#777777"
+      }
     ]
   }
 ]
