@@ -1,70 +1,28 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "Retro prints · pastel moods",
-        "heading": "Big, calm color for your walls.",
-        "text": "Nordlys brings Swiss lakes, peaks and city streets to your walls. Six travel posters in soft colours, inspired by the places you love.",
-        "button_label": "Browse the posters",
-        "note": "50 × 70 cm · CHF 60 · Unframed",
-        "collection": "posters"
+        "heading": "Places worth keeping.",
+        "text": "Swiss places, collected on paper.",
+        "button_label": "Explore the prints",
+        "collection": "posters",
+        "featured_product": "caumasee",
+        "image_caption": "Caumasee, at home."
       }
     },
     "collection": {
       "type": "featured-collection",
       "settings": {
         "heading": "The collection",
-        "subheading": "Six posters. One size. Zero wrong picks.",
+        "subheading": "",
         "collection": "posters",
         "limit": 12
       }
-    },
-    "values": {
-      "type": "value-props",
-      "blocks": {
-        "b1": {
-          "type": "prop",
-          "settings": {
-            "heading": "One size, on purpose",
-            "text": "Every Nordlys poster is 50 × 70 cm, a standard size that makes finding a frame simple."
-          }
-        },
-        "b2": {
-          "type": "prop",
-          "settings": {
-            "heading": "Soft colours, familiar places",
-            "text": "Muted colours and vintage travel-poster style bring Swiss landscapes and city scenes into your home."
-          }
-        },
-        "b3": {
-          "type": "prop",
-          "settings": {
-            "heading": "Make it your own",
-            "text": "Posters are sold unframed. Room images show styling ideas, so you can choose a frame that suits your space."
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ],
-      "settings": {}
     }
   },
   "order": [
     "hero",
-    "collection",
-    "values"
+    "collection"
   ]
 }
