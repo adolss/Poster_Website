@@ -47,6 +47,7 @@
     </div>
   </div>
   {% assign room = product.images[1] %}
+  {% for scene in product.images %}{% if scene.src contains '-side-view' %}{% assign room = scene %}{% break %}{% endif %}{% endfor %}
   {% if room %}<section class="room-story"><img src="{{ room | image_url: width: 1600 }}" alt="{{ product.title | escape }} in a room — illustrative styling inspiration" width="{{ room.width }}" height="{{ room.height }}" loading="lazy"><div><h2>A little elsewhere, at home.</h2><p>A feel for {{ product.title | escape }} in your space.</p><p class="text-muted">50 × 70 cm. Styling inspiration; frame not included. Check the dimensions against your own wall.</p></div></section>{% endif %}
 </div>
 {% schema %}
