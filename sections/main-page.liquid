@@ -1,9 +1,9 @@
 <div class="page-main">
-  <h1>{{ page.title }}</h1>
-  <div class="rte">{{ page.content }}</div>
+  <h1>{% if page.handle == "about-nordlys" %}The studio{% else %}{{ page.title }}{% endif %}</h1>
+  <div class="rte">{{ page.content | replace: "Nordlys", "BLICKLI" }}</div>
   {%- if page.handle == 'contact' -%}
     <p>Questions about a poster or an order? Send us a message below. If you have already ordered, include your order number.</p>
-    {%- form 'contact', id: 'NordlysContact', class: 'nordlys-contact' -%}
+    {%- form 'contact', id: 'BlickliContact', class: 'blickli-contact' -%}
       {%- if form.posted_successfully? -%}
         <p role="status">Thanks for your message. We will get back to you by email.</p>
       {%- endif -%}
@@ -12,7 +12,7 @@
       {%- endif -%}
       <p><label for="ContactName">Name</label><input class="input" id="ContactName" type="text" name="contact[name]" autocomplete="name" value="{{ form.name | escape }}" required></p>
       <p><label for="ContactEmail">Email</label><input class="input" id="ContactEmail" type="email" name="contact[email]" autocomplete="email" value="{{ form.email | escape }}" required></p>
-      <p><label for="ContactMessage">Message</label><textarea class="input" style="border-radius:16px;min-height:160px;" id="ContactMessage" name="contact[body]" rows="6" required>{{ form.body | escape }}</textarea></p>
+      <p><label for="ContactMessage">Message</label><textarea class="input" style="min-height:160px;" id="ContactMessage" name="contact[body]" rows="6" required>{{ form.body | escape }}</textarea></p>
       <button class="btn btn-primary" type="submit">Send message</button>
     {%- endform -%}
   {%- endif -%}
@@ -21,3 +21,4 @@
 {% schema %}
 { "name": "Page", "settings": [] }
 {% endschema %}
+
