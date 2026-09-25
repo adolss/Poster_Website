@@ -1,5 +1,5 @@
 <footer class="site-footer">
-  <span class="footer-brand">{{ shop.name }}</span>
+  <span class="footer-brand">{{ settings.brand_name | default: "BLICKLI" | escape }}</span>
   <span class="text-muted">{{ section.settings.tagline }}</span>
   {%- if pages['shipping-faq'] != blank -%}
     <a href="{{ pages['shipping-faq'].url }}">Shipping &amp; FAQ</a>
@@ -8,7 +8,7 @@
     <a href="{{ pages['contact'].url }}">Contact</a>
   {%- endif -%}
   {%- if pages['about-nordlys'] != blank -%}
-    <a href="{{ pages['about-nordlys'].url }}">About Nordlys</a>
+    <a href="{{ pages['about-nordlys'].url }}">The studio</a>
   {%- endif -%}
   {%- for policy in shop.policies -%}
     {%- if policy.body != blank -%}
@@ -30,3 +30,4 @@
   ]
 }
 {% endschema %}
+
