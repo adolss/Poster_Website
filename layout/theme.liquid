@@ -25,7 +25,7 @@
       --color-accent-2: {{ settings.color_accent_2 }};
     }
   {%- endstyle -%}
-  {{ 'norrvyn.css' | asset_url | stylesheet_tag }}
+  {{ 'blickli.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}
 </head>
@@ -40,7 +40,7 @@
 
   {% section 'footer' %}
 
-  <script src="{{ 'norrvyn.js' | asset_url }}" defer></script>
+  <script src="{{ 'blickli.js' | asset_url }}" defer></script>
 </body>
 </html>
 

@@ -1,8 +1,7 @@
-# Norrvyn — Shopify theme
+# BLICKLI — Shopify theme
 
-Custom Online Store 2.0 theme for norrvyn.ch, ported from the original
-Norrvyn design (same palette, Caprasimo/Figtree type, poster cards,
-responsive layout). Cart and checkout are native Shopify.
+Custom Online Store 2.0 theme for blickli.ch (originally ported from the
+Norrvyn poster site design, since rebranded to BLICKLI). Cart and checkout are native Shopify.
 
 ## Live and dev themes
 
@@ -10,8 +9,8 @@ Two themes, two branches — so work in progress never lands on the live shop.
 
 | Theme in Shopify | Branch | State |
 | --- | --- | --- |
-| **Norrvyn (live)** | `shopify` | Published — serves norrvyn.ch |
-| **Norrvyn (dev)** | `shopify-dev` | Unpublished — preview link only |
+| **BLICKLI (live)** | `blickli-live` | Published — serves blickli.ch |
+| **Poster_Website/shopify-dev** | `shopify-dev` | Unpublished — preview link only |
 
 Connect each one in **Online Store → Themes → Add theme → Connect from
 GitHub** → repo `adolss/Poster_Website` → pick the branch (theme files are at
@@ -24,8 +23,8 @@ and open it with **Preview**.
    Shopify commits editor changes back to `shopify-dev` automatically.
 2. Check the dev theme's preview link.
 3. When it looks right, promote to live by merging the branch:
-   `git push origin origin/shopify-dev:shopify` (fast-forward), or open a PR
-   `shopify-dev` → `shopify` on GitHub if you want the diff in front of you.
+   `git push origin origin/shopify-dev:blickli-live` (fast-forward), or open a PR
+   `shopify-dev` → `blickli-live` on GitHub if you want the diff in front of you.
    Shopify syncs the live theme within a minute.
 
 ### Two things to know
@@ -63,13 +62,13 @@ and open it with **Preview**.
    "free EU shipping" promise, or edit the texts in the theme editor.
 6. **Domain** — when ready to go live: in GoDaddy replace the four GitHub
    Pages A records with Shopify's A record `23.227.38.65` and point the
-   `www` CNAME at `shops.myshopify.com`; then add norrvyn.ch as a domain in
+   `www` CNAME at `shops.myshopify.com`; then add blickli.ch as a domain in
    Shopify (Settings → Domains) and set it primary.
 
 ## Files
 
 - `layout/theme.liquid` — document shell, fonts, color tokens from settings
-- `assets/norrvyn.css` — full design system + responsive layer
-- `assets/norrvyn.js` — AJAX add-to-cart + live cart count
+- `assets/blickli.css` — full design system + responsive layer
+- `assets/blickli.js` — AJAX add-to-cart + live cart count
 - `sections/` — hero, featured collection, value props, product, cart, etc.
 - `templates/*.json` — OS 2.0 templates wiring sections to pages
