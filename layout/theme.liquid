@@ -3,14 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
-    {%- if request.page_type == 'index' -%}Places worth keeping.{%- else -%}{{ page_title }}{%- endif -%}
-     — {{ settings.brand_name | default: "BLICKLI" | escape }}
-  </title>
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {%- endif -%}
-  <link rel="canonical" href="{{ canonical_url }}">
+  {% render 'seo' %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

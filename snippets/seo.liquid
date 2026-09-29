@@ -1,0 +1,79 @@
+{%- liquid
+  assign seo_brand = settings.brand_name | default: 'BLICKLI'
+  assign seo_title = page_title | strip
+  assign seo_description = page_description | strip
+
+  if request.page_type == 'index'
+    if seo_title == blank or seo_title == shop.name or seo_title == seo_brand
+      assign seo_title = seo_brand | append: ' — Swiss Travel Posters & Art Prints'
+    endif
+    if seo_description == blank
+      assign seo_description = 'Discover ' | append: seo_brand | append: ' Swiss travel posters inspired by Engadin, Caumasee, Bernina, Bern, Langstrasse and Stoosbahn. Explore art prints of places worth keeping.'
+    endif
+  elsif request.page_type == 'product'
+    if product.metafields.global.title_tag == blank
+      if seo_title == blank or seo_title == product.title
+        assign seo_title = product.title
+        assign seo_title_lower = seo_title | downcase
+        unless seo_title_lower contains 'poster'
+          assign seo_title = seo_title | append: ' Poster'
+        endunless
+      endif
+    endif
+    if seo_description == blank
+      assign seo_description = product.description | strip_html | strip_newlines | strip | truncate: 160
+      if seo_description == blank
+        assign seo_description = 'Explore the ' | append: product.title | append: ' poster from ' | append: seo_brand | append: '. Discover Swiss places, collected on paper.'
+      endif
+    endif
+  elsif request.page_type == 'collection'
+    if seo_description == blank
+      assign seo_description = collection.description | strip_html | strip_newlines | strip | truncate: 160
+      if seo_description == blank
+        assign seo_description = 'Explore ' | append: collection.title | append: ' from ' | append: seo_brand | append: ': Swiss travel posters and art prints inspired by places worth keeping.'
+      endif
+    endif
+  endif
+
+  if current_tags != blank
+    assign seo_tags = current_tags | join: ', '
+    assign seo_title = seo_title | append: ' — ' | append: seo_tags
+  endif
+  if current_page > 1
+    assign seo_title = seo_title | append: ' — Page ' | append: current_page
+  endif
+  assign seo_title_lower = seo_title | downcase
+  assign seo_brand_lower = seo_brand | downcase
+  unless seo_title_lower contains seo_brand_lower
+    assign seo_title = seo_title | append: ' — ' | append: seo_brand
+  endunless
+-%}
+<title>{{ seo_title | escape }}</title>
+{%- if seo_description != blank %}
+  <meta name="description" content="{{ seo_description | escape }}">
+{%- endif %}
+<link rel="canonical" href="{{ canonical_url | escape }}">
+
+{%- if request.page_type == 'index' %}
+  {%- capture json_less_than -%}\u003c{%- endcapture -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ seo_brand | json | replace: '<', json_less_than }},
+      "url": {{ canonical_url | json | replace: '<', json_less_than }}
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": {{ seo_brand | json | replace: '<', json_less_than }},
+      "url": {{ canonical_url | json | replace: '<', json_less_than }}
+    }
+  </script>
+{%- elsif request.page_type == 'product' %}
+  <script type="application/ld+json">
+    {{ product | structured_data }}
+  </script>
+{%- endif %}
