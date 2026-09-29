@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "scripts": { "test": "node --test seo.test.cjs" },
+  "devDependencies": { "liquidjs": "10.29.0" }
+}

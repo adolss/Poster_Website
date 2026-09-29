@@ -72,3 +72,24 @@ and open it with **Preview**.
 - `assets/blickli.js` — AJAX add-to-cart + live cart count
 - `sections/` — hero, featured collection, value props, product, cart, etc.
 - `templates/*.json` — OS 2.0 templates wiring sections to pages
+
+## SEO
+
+`snippets/seo.liquid` renders page titles, descriptions, canonical URLs and
+structured data. Custom SEO titles and descriptions in Shopify take precedence;
+the homepage gets a Swiss travel poster title when its title is only the store
+name. Product titles get “Poster” only when using the default product title.
+Shopify supplies product structured data from the catalog.
+
+After previewing and publishing the theme changes, inspect `https://blickli.ch/`
+in Google Search Console, submit `https://blickli.ch/sitemap.xml` if needed, and
+request indexing. Shopify already maintains the sitemap and robots.txt. Metadata
+changes do not guarantee indexing; use Search Console's reported indexing reason
+to diagnose any remaining exclusion.
+
+Run the metadata rendering checks with `npm ci --prefix tests` followed by
+`npm test --prefix tests`. They use LiquidJS with Shopify globals and a fixture
+for the native `structured_data` filter. Before publishing, inspect homepage,
+collection and product page source in the Shopify development-theme preview,
+confirm custom SEO overrides, and validate the real product JSON-LD with Google's
+[Rich Results Test](https://search.google.com/test/rich-results).
